@@ -5,8 +5,8 @@
       <button @click="saveTodo">Save todo</button>
     </form>
     <div v-if="isLoading">WAIT PLEASE!!</div>
-    <div class="cards" v-for="card in cards" v-if="!isLoading">
-      <div class="card">
+    <div class="cards">
+      <div class="card" v-for="card in cards" v-if="!isLoading">
         <div>{{ card.id }}</div>
         <div>{{ card.title }}</div>
         <div class="card-body">
@@ -31,6 +31,8 @@ interface CardInterface {
 }
 
 const cards = ref<CardInterface[]>([]);
+const isLoading = ref<boolean>(false);
+const title = ref<string>('')
 
 export default {
   components: {
@@ -39,8 +41,8 @@ export default {
   data() {
     return {
       cards: cards,
-      title: "",
-      isLoading: false,
+      title: title,
+      isLoading: isLoading,
     };
   },
   methods: {
@@ -52,16 +54,24 @@ export default {
         });
     },
 
+    refetch() {
+      isLoading.value = true;
+      setTimeout(() => {
+        isLoading.value = false;
+        this.fetchTodos();
+      }, 2000);
+    },
+
     saveTodo(e: Event) {
       e.preventDefault();
       const newItem: CardInterface = {
         userId: Math.random(),
         id: cards.value[cards.value.length - 1].id + 1,
-        title: this.title,
+        title: title.value,
         completed: false,
       };
       cards.value.push(newItem);
-      this.title = "";
+      title.value = "";
     },
 
     deleteTodo(id: number) {
@@ -76,11 +86,7 @@ export default {
   watch: {
     async cards(cardsArray: CardInterface[]) {
       if (cardsArray.length === 0) {
-        this.isLoading = true;
-        setTimeout(() => {
-          this.fetchTodos();
-          this.isLoading = false;
-        }, 2000);
+        this.refetch();
       }
     },
   },
@@ -110,6 +116,15 @@ export default {
 }
 
 .cards {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 50%;
+}
+
+.card {
+  margin: 15px;
 }
 .buttons {
   min-width: 400px;
