@@ -1,9 +1,9 @@
 <template>
   <div class="card">
-    <h2>{{card.title}}</h2>
+    <div class="card-title">{{card.title}}</div>
     <div class="card-body">
+      Done:
       <input type="checkbox" checked={{card.completed}}>
-      {{card.text}}
     </div>
   </div>
 </template>

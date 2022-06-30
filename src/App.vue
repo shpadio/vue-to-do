@@ -1,33 +1,27 @@
 <template>
-  <div class="main" >
+  <div class="main">
     <form class="form">
-      <input v-model="text">
+      <input v-model="title" placeholder="text" />
       <button @click="saveTodo">Save todo</button>
     </form>
     <div class="cards" v-for="card in cards">
       <div class="card">
-        <div class="card-title">{{card.title}}</div>
+        <div>{{ card.id }}</div>
+        <div class="card-text">{{card.title}}</div>
         <div class="card-body">
-          Done: {{card.text}}
-          <input type="checkbox" checked={{card.completed}}>
+          Done:
+          <input type="checkbox" checked="{{card.completed}}" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import Card from "@/components/Card.vue";
 import { ref } from "vue";
 
-const cards = ref([] as Card[]);
-
-interface Card {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+const cards = ref([]);
 
 export default {
   components: {
@@ -36,26 +30,33 @@ export default {
   data() {
     return {
       cards: cards,
-      text: ''
+      title: "",
     };
   },
   methods: {
     async fetchTodos() {
       await fetch("https://jsonplaceholder.typicode.com/todos")
         .then((response) => response.json())
-        .then((data) => {cards.value = data.filter((card) => card.id < 5) as Card[]});
+        .then((data) => {
+          cards.value = data.filter((card) => card.id < 5) as Card[];
+        });
     },
 
-    saveTodo(e: Event){
-      e.preventDefault()
-      console.log(this.text,'text!')
-
-    }
-
+    saveTodo(e) {
+      e.preventDefault();
+      const newItem = {
+        userId: Math.random(),
+        id: cards.value[cards.value.length - 1].id + 1,
+        title: this.title,
+        completed: false,
+      };
+      cards.value.push(newItem)
+      this.title = '';
+    },
   },
 
   async mounted() {
-   await this.fetchTodos()
+    await this.fetchTodos();
   },
 };
 </script>
@@ -83,7 +84,6 @@ export default {
 }
 
 .cards {
-
 }
 .buttons {
   min-width: 400px;
