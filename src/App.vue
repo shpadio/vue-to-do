@@ -4,7 +4,8 @@
       <input v-model="title" placeholder="text" />
       <button @click="saveTodo">Save todo</button>
     </form>
-    <div class="cards" v-for="card in cards">
+    <div v-if="isLoading">WAIT PLEASE!!</div>
+    <div class="cards" v-for="card in cards" v-if="!isLoading">
       <div class="card">
         <div>{{ card.id }}</div>
         <div>{{ card.title }}</div>
@@ -39,6 +40,7 @@ export default {
     return {
       cards: cards,
       title: "",
+      isLoading: false,
     };
   },
   methods: {
@@ -72,9 +74,13 @@ export default {
   },
 
   watch: {
-    async cards(newCards: CardInterface[]) {
-      if (newCards.length === 0) {
-        await this.fetchTodos();
+    async cards(cardsArray: CardInterface[]) {
+      if (cardsArray.length === 0) {
+        this.isLoading = true;
+        setTimeout(() => {
+          this.fetchTodos();
+          this.isLoading = false;
+        }, 2000);
       }
     },
   },
