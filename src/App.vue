@@ -7,21 +7,29 @@
     <div class="cards" v-for="card in cards">
       <div class="card">
         <div>{{ card.id }}</div>
-        <div class="card-text">{{card.title}}</div>
+        <div>{{ card.title }}</div>
         <div class="card-body">
           Done:
           <input type="checkbox" checked="{{card.completed}}" />
         </div>
+        <button @click="deleteTodo(card.id)">Delete todo</button>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 import Card from "@/components/Card.vue";
 import { ref } from "vue";
 
-const cards = ref([]);
+interface CardInterface {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+const cards = ref<CardInterface[]>([]);
 
 export default {
   components: {
@@ -34,29 +42,41 @@ export default {
     };
   },
   methods: {
-    async fetchTodos() {
+    async fetchTodos(): Promise<void> {
       await fetch("https://jsonplaceholder.typicode.com/todos")
         .then((response) => response.json())
-        .then((data) => {
-          cards.value = data.filter((card) => card.id < 5) as Card[];
+        .then((data: CardInterface[]) => {
+          cards.value = data.filter((card) => card.id < 5);
         });
     },
 
-    saveTodo(e) {
+    saveTodo(e: Event) {
       e.preventDefault();
-      const newItem = {
+      const newItem: CardInterface = {
         userId: Math.random(),
         id: cards.value[cards.value.length - 1].id + 1,
         title: this.title,
         completed: false,
       };
-      cards.value.push(newItem)
-      this.title = '';
+      cards.value.push(newItem);
+      this.title = "";
+    },
+
+    deleteTodo(id: number) {
+      cards.value = cards.value.filter((card) => card.id !== id);
     },
   },
 
   async mounted() {
     await this.fetchTodos();
+  },
+
+  watch: {
+    async cards(newCards: CardInterface[]) {
+      if (newCards.length === 0) {
+        await this.fetchTodos();
+      }
+    },
   },
 };
 </script>
