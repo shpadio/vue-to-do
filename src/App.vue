@@ -6,6 +6,9 @@
     <button>
       <router-link to="/chess" >Chess</router-link>
     </button>
+    <button>
+      <router-link to="/cats" >Cats</router-link>
+    </button>
     <router-view></router-view>
   </div>
 </template>

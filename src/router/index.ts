@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Chess from "@/components/Chess.vue";
 import ToDo from "@/components/ToDo.vue";
+import Cats from "@/components/Cats.vue"
 
 
 
@@ -14,6 +15,11 @@ const routes = [
         path: "/chess",
         name: "Chess",
         component: Chess,
+    },
+    {
+        path: "/cats",
+        name: "Cats",
+        component: Cats,
     },
 ];
 
