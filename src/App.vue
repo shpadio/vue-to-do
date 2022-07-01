@@ -1,25 +1,23 @@
 <template>
   <div class="main">
-    <ToDo />
-    <Chess/>
+    <!--    <ToDo />-->
+    <Chess />
   </div>
 </template>
 
 <script lang="ts">
-
-import ToDo from "@/components/ToDo.vue";
+// import ToDo from "@/components/ToDo.vue";
 import Chess from "@/components/Chess.vue";
 
 export default {
-  data(){
-
+  data() {
+    return {};
   },
 
   components: {
     Chess,
-    ToDo,
+    // ToDo,
   },
-
 };
 </script>
 
