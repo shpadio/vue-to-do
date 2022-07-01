@@ -6,14 +6,8 @@
     </form>
     <div v-if="isLoading">WAIT PLEASE!!</div>
     <div class="cards">
-      <div class="card" v-for="card in cards" v-if="!isLoading">
-        <div>{{ card.id }}</div>
-        <div>{{ card.title }}</div>
-        <div class="card-body">
-          Done:
-          <input type="checkbox" checked="{{card.completed}}" />
-        </div>
-        <button @click="deleteTodo(card.id)">Delete todo</button>
+      <div class="card" v-for="card in cards" key="card.id" v-if="!isLoading">
+        <card v-bind:card="card" v-bind:delete-todo="deleteTodo" />
       </div>
     </div>
   </div>
@@ -32,11 +26,14 @@ interface CardInterface {
 
 const cards = ref<CardInterface[]>([]);
 const isLoading = ref<boolean>(false);
-const title = ref<string>('')
+const title = ref<string>("");
 
 export default {
-  components: {
-    Card,
+  props: {
+    cards: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -44,6 +41,12 @@ export default {
       title: title,
       isLoading: isLoading,
     };
+  },
+  components: {
+    Card,
+    props: {
+      cards,
+    },
   },
   methods: {
     async fetchTodos(): Promise<void> {
@@ -75,7 +78,9 @@ export default {
     },
 
     deleteTodo(id: number) {
+      console.log(id, "ID@");
       cards.value = cards.value.filter((card) => card.id !== id);
+      console.log(cards.value, "cards@");
     },
   },
 
