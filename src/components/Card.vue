@@ -1,23 +1,28 @@
 <template>
-  <div>{{ card.userId }}</div>
-  <div>{{ card.title }}</div>
-  <div class="card-body">
-    Done:
-    <input type="checkbox" v-model="card.completed" checked="{{Boolean(card.completed)}}" />
+  <div class="card">
+    <div>{{ card.userId }}</div>
+    <div>{{ card.title }}</div>
+    <div class="card-body">
+      Done:
+      <input
+        type="checkbox"
+        v-model="card.completed"
+        checked="{{Boolean(card.completed)}}"
+      />
+    </div>
+    <button v-bind:key="card.id" v-on:click="deleteTodo(card.id)">
+      Delete todo
+    </button>
   </div>
-  <button v-bind:key="card.id"   v-on:click="deleteTodo(card.id)">Delete todo</button>
 </template>
 
-<script lang="ts">
-
+<script>
 export default {
   name: "CardComponent",
   props: ["card", "deleteTodo"],
   methods: {},
-  mounted() {}
-
+  mounted() {},
 };
-
 </script>
 
 <style>
@@ -36,6 +41,6 @@ export default {
 .card-body {
   display: flex;
   flex-direction: row;
-  //justify-content: flex-end;
+
 }
 </style>

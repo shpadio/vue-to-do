@@ -1,7 +1,12 @@
 <template>
   <div class="main">
-        <ToDo />
-<!--    <Chess />-->
+    <button>
+      <router-link to="/todo">Todos</router-link>
+    </button>
+    <button>
+      <router-link to="/chess" >Chess</router-link>
+    </button>
+    <router-view></router-view>
   </div>
 </template>
 
