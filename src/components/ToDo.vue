@@ -111,25 +111,4 @@ export default {
   flex-wrap: wrap;
   max-width: 50%;
 }
-
-.card {
-  margin: 15px;
-}
-.buttons {
-  min-width: 400px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.button {
-  display: flex;
-  padding: 5px;
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-  max-width: 300px;
-  min-height: 30px;
-  border: cadetblue solid 1px;
-  border-radius: 10px;
-}
 </style>

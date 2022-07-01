@@ -1,8 +1,9 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Chess from "@/components/Chess.vue";
 import ToDo from "@/components/ToDo.vue";
-import Images from "@/components/Images.vue";
-
+import Weather from "@/components/Weather.vue"
+import Images from "@/components/Images.vue"
+import CurrencyCalculator from "@/components/CurrencyCalculator.vue"
 
 
 const routes = [
@@ -20,6 +21,16 @@ const routes = [
         path: "/images",
         name: "Images",
         component: Images,
+    },
+    {
+        path: "/weather",
+        name: "Weather",
+        component: Weather,
+    },
+    {
+        path: "/calculator",
+        name: "CurrencyCalculator",
+        component: CurrencyCalculator,
     },
 ];
 

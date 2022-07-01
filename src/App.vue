@@ -1,30 +1,20 @@
 <template>
   <div class="main">
-    <button>
-      <router-link to="/todo">Todos</router-link>
-    </button>
-    <button>
-      <router-link to="/chess" >Chess</router-link>
-    </button>
-    <button>
-      <router-link to="/images" >Images</router-link>
-    </button>
+    <div class="buttons">
+        <router-link to="/todo">Todos</router-link>
+        <router-link to="/chess">Chess</router-link>
+        <router-link to="/images">Images</router-link>
+        <router-link to="/weather">Weather</router-link>
+      <router-link to="/calculator">Calculator</router-link>
+    </div>
     <router-view></router-view>
   </div>
 </template>
 
-<script lang="ts">
-import ToDo from "@/components/ToDo.vue";
-import Chess from "@/components/Chess.vue";
-
+<script>
 export default {
   data() {
     return {};
-  },
-
-  components: {
-    Chess,
-    ToDo,
   },
 };
 </script>
@@ -38,5 +28,10 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   margin: auto;
+}
+.buttons {
+  min-width: 400px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

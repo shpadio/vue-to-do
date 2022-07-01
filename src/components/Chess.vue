@@ -82,6 +82,7 @@ export default {
 .chess-page {
   display: flex;
   padding: 50px;
+  flex-direction: row;
 }
 
 .cell-white {

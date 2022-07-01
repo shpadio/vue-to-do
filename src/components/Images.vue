@@ -9,9 +9,9 @@
 <script>
 import { ref } from "vue";
 
-const url = ref(null);
+const url = ref('');
 export default {
-  name: "Cats",
+  name: "Images",
   data() {
     return {
       url: url
@@ -28,10 +28,8 @@ export default {
         .then((data) => (url.value = data.url));
     },
   },
- async mounted() {
-
+ async beforeMount() {
     await this.fetchImg();
-   console.log(url.value,'url')
   },
 };
 </script>
