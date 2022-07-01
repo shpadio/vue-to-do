@@ -7,7 +7,7 @@
       <router-link to="/chess" >Chess</router-link>
     </button>
     <button>
-      <router-link to="/cats" >Cats</router-link>
+      <router-link to="/images" >Images</router-link>
     </button>
     <router-view></router-view>
   </div>

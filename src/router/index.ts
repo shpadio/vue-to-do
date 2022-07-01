@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Chess from "@/components/Chess.vue";
 import ToDo from "@/components/ToDo.vue";
-import Cats from "@/components/Cats.vue"
+import Images from "@/components/Images.vue";
 
 
 
@@ -17,9 +17,9 @@ const routes = [
         component: Chess,
     },
     {
-        path: "/cats",
-        name: "Cats",
-        component: Cats,
+        path: "/images",
+        name: "Images",
+        component: Images,
     },
 ];
 
