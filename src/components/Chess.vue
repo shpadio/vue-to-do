@@ -38,8 +38,6 @@ export default {
         color: color === 'cell-white' ? 'cell-black' : 'cell-white'
       }
 
-
-
     },
 
     getColor(id) {

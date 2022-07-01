@@ -6,27 +6,21 @@
   <div v-if="isLoading">WAIT PLEASE!!</div>
   <div class="cards">
     <div class="card" v-for="card in cards" key="card.id" v-if="!isLoading">
-     <card-component v-bind:card="card" v-bind:delete-todo="deleteTodo"/>
+     <card-component :card="card" :delete-todo="deleteTodo"/>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script >
 import CardComponent from "@/components/Card.vue";
 
-export interface CardInterface {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
 
-const cards = ref<CardInterface[]>([]);
-const isLoading = ref<boolean>(false);
+const cards = ref([]);
+const isLoading = ref(false);
 
 import {ref} from "vue";
 
-const title = ref<string>("");
+const title = ref("");
 
 export default {
   name: "ToDo",
@@ -43,12 +37,10 @@ export default {
     };
   },
   methods: {
-    async fetchTodos(): Promise<void> {
-      await fetch("https://jsonplaceholder.typicode.com/todos")
+    async fetchTodos(){
+      await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
           .then((response) => response.json())
-          .then((data: CardInterface[]) => {
-            cards.value = data.filter((card) => card.id < 4);
-          });
+          .then((data) => cards.value = data)
     },
 
     refetch() {
@@ -59,9 +51,10 @@ export default {
       }, 2000);
     },
 
-    saveTodo(e: Event) {
+    saveTodo(e) {
       e.preventDefault();
-      const newItem: CardInterface = {
+      if (title.value === "") return
+      const newItem = {
         userId: Math.random(),
         id: Math.random() * Math.random(),
         title: title.value,
@@ -71,7 +64,7 @@ export default {
       title.value = "";
     },
 
-    deleteTodo(id: number) {
+    deleteTodo(id) {
       cards.value = cards.value.filter((card) => card.id !== id);
     },
 
@@ -84,7 +77,7 @@ export default {
   },
 
   watch: {
-    async cards(cardsArray: CardInterface[]) {
+    async cards(cardsArray) {
       if (cardsArray.length === 0) {
         this.refetch();
       }
