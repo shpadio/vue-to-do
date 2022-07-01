@@ -3,20 +3,21 @@
   <div>{{ card.title }}</div>
   <div class="card-body">
     Done:
-    <input type="checkbox" checked="{{card.completed}}" />
+    <input type="checkbox" v-model="card.completed" checked="{{Boolean(card.completed)}}" />
   </div>
-  <button v-bind:key="card.id" v-on:click="deleteTodo(card.id)">
-    Delete todo
-  </button>
+  <button v-bind:key="card.id"   v-on:click="deleteTodo(card.id)">Delete todo</button>
 </template>
 
 <script lang="ts">
+
 export default {
   name: "CardComponent",
   props: ["card", "deleteTodo"],
   methods: {},
-  mounted() {},
+  mounted() {}
+
 };
+
 </script>
 
 <style>

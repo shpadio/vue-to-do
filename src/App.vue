@@ -53,7 +53,7 @@ export default {
       await fetch("https://jsonplaceholder.typicode.com/todos")
         .then((response) => response.json())
         .then((data: CardInterface[]) => {
-          cards.value = data.filter((card) => card.id < 5);
+          cards.value = data.filter((card) => card.id < 4);
         });
     },
 
@@ -69,7 +69,7 @@ export default {
       e.preventDefault();
       const newItem: CardInterface = {
         userId: Math.random(),
-        id: cards.value[cards.value.length - 1].id + 1,
+        id: Math.random() * Math.random(),
         title: title.value,
         completed: false,
       };
@@ -78,9 +78,7 @@ export default {
     },
 
     deleteTodo(id: number) {
-      console.log(id, "ID@");
-      cards.value = cards.value.filter((card) => card.id !== id);
-      console.log(cards.value, "cards@");
+        cards.value = cards.value.filter((card) => card.id !== id);
     },
   },
 
