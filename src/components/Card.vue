@@ -4,15 +4,15 @@
     <div>{{ card.title }}</div>
     <div class="card-body">
       Done:
-      <input
+      <a-input
         type="checkbox"
         v-model="card.completed"
         checked="{{Boolean(card.completed)}}"
       />
     </div>
-    <button v-bind:key="card.id" v-on:click="deleteTodo(card.id)">
+    <a-button shape="circle" class="button" v-bind:key="card.id" v-on:click="deleteTodo(card.id)">
       Delete todo
-    </button>
+    </a-button>
   </div>
 </template>
 
@@ -41,6 +41,10 @@ export default {
 .card-body {
   display: flex;
   flex-direction: row;
-
+}
+.button {
+  border: darkcyan solid 1px;
+  border-radius: 10px;
+  padding: 10px;
 }
 </style>

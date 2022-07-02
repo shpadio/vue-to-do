@@ -5,9 +5,9 @@
   </form>
   <div v-if="isLoading">WAIT PLEASE!!</div>
   <div class="cards">
-    <div v-for="card in cards" key="card.id" v-if="!isLoading">
+    <a-card v-for="card in cards" key="card.id" v-if="!isLoading">
      <card-component :card="card" :delete-todo="deleteTodo"/>
-    </div>
+    </a-card>
   </div>
 </template>
 
