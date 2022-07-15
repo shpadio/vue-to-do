@@ -25,7 +25,6 @@ const cells = ref([
 export default {
   name: "Chess",
   methods: {
-
     updateCells(values) {
       return values.map((v) => this.changeColor(v.id))
     },

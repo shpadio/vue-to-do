@@ -6,8 +6,7 @@
       Done:
       <a-input
         type="checkbox"
-        v-model="card.completed"
-        checked="{{Boolean(card.completed)}}"
+        checked="card.completed"
       />
     </div>
     <a-button shape="circle" class="button" v-bind:key="card.id" v-on:click="deleteTodo(card.id)">

@@ -1,10 +1,11 @@
 <template>
   <div class="main">
     <div class="buttons">
-        <router-link to="/todo">Todos</router-link>
-        <router-link to="/chess">Chess</router-link>
-        <router-link to="/images">Images</router-link>
-        <router-link to="/weather">Weather</router-link>
+      <router-link to="/todo">Todos</router-link>
+      <router-link to="/chess">Chess</router-link>
+      <router-link to="/images">Images</router-link>
+      <router-link to="/weather">Weather</router-link>
+      <router-link to="/sun">Солнышко</router-link>
       <router-link to="/calculator">Calculator</router-link>
     </div>
     <router-view></router-view>

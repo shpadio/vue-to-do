@@ -45,9 +45,9 @@ export default {
 
     refetch() {
       isLoading.value = true;
-      setTimeout(() => {
+      setTimeout(async () => {
         isLoading.value = false;
-        this.fetchTodos();
+        await this.fetchTodos();
       }, 2000);
     },
 
@@ -68,12 +68,17 @@ export default {
       cards.value = cards.value.filter((card) => card.id !== id);
     },
 
+    cardsToDefault(){
+      cards.value = cards.value.map((card) => ({...card,completed: false}))
+    }
+
 
 
   },
 
   async mounted() {
     await this.fetchTodos();
+    this.cardsToDefault()
   },
 
   watch: {

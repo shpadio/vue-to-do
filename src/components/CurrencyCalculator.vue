@@ -59,7 +59,7 @@ export default {
 
     },
 
-    addDeal(deal: DealInterface){
+    addDeal(deal: DealPayload){
 
     },
 
